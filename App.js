@@ -18,7 +18,8 @@ function HomeApp({ navigation })  {
   return (
 
         <Tab.Navigator screenOptions={{
-         headerShown: false
+         headerShown: false,
+         tabBarIconStyle: { display: "none" }
          }}>
           <Tab.Screen name="New deck" component={DeckList} />
           <Tab.Screen name="deck list" component={NewDeck} />

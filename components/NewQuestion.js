@@ -82,8 +82,6 @@ const styles = StyleSheet.create({
 		height :45,
 		marginLeft: 30,
 		marginRight: 30,
-		alignSelf: 'flex-end',
-		justifyContent: 'center',
 	},
 	submitBtnText: {
 		color: white,
