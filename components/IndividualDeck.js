@@ -8,10 +8,17 @@ class DeckList extends React.Component{
 //const a = this.props['route'].params.entryId.key
 render() {
 	const id = this.props['route'].params.entryId.key
-	console.log('aa', this.props['route'].params.entryId.key)
+	const questions = this.props['route'].params.questions.questions
 		return (
 			<View>
 				<Text>{this.props['route'].params.entryId.key}</Text>
+				<Text style={styles.decks} >{this.props['route'].params.entryId.key}</Text>
+				<Text style={styles.cards} >{this.props['route'].params.card.card}cards</Text>
+				<TouchableOpacity 
+			      	style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.androidSubmitBtn}
+			      	onPress={() => this.props.navigation.navigate('Quiz', {entryId: {id} , questions: {questions}})}>
+						<Text style={styles.submitBtnText}>Start Quiz</Text>
+				</TouchableOpacity>
 				<TouchableOpacity 
 			      	style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.androidSubmitBtn}
 			      	onPress={() => this.props.navigation.navigate('NewQuestion', {entryId: {id}})}>
