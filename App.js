@@ -5,9 +5,11 @@ import NewDeck from './components/NewDeck'
 import DeckList from './components/DeckList'
 import NewQuestion from './components/NewQuestion'
 import IndividualDeck from './components/IndividualDeck'
+import Quiz from './components/Quiz'
 import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator  } from '@react-navigation/stack'
+import { setLocalNotification } from './utils/helper'
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -31,6 +33,9 @@ function HomeApp({ navigation })  {
 }
 
 export default class App extends React.Component {
+  componentDidMount() {
+    setLocalNotification()
+  }
   render() {
     return (
       <NavigationContainer>
@@ -38,6 +43,7 @@ export default class App extends React.Component {
           <Stack.Screen name="Home" component={HomeApp} />
           <Stack.Screen name="IndividualDeck" component={IndividualDeck} />
           <Stack.Screen name="NewQuestion" component={NewQuestion} />
+          <Stack.Screen name="Quiz" component={Quiz} />
         </Stack.Navigator>
       </NavigationContainer>
       )

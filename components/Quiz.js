@@ -2,9 +2,13 @@ import React from 'react'
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, AsyncStorage } from 'react-native'
 import { purple, white } from '../utils/colors'
 import { showEntries, removeEntry, addQuestion, showEntries2, DECKS_STORAGE_KEY } from '../utils/api'
-
+import { clearLocalNotification, setLocalNotification } from '../utils/helper'
 
 class Quiz extends React.Component{
+// componentDidMount() {
+//     clearLocalNotification()
+//     .then(setLocalNotification)
+// }
 state = {
 		correct: 0,
 		inCorrect: 0,
@@ -41,6 +45,11 @@ showAnswer = () => {
 			}))
 	}
 render() {
+	if (this.state.count === this.props['route'].params.questions.questions.length)
+	{
+		clearLocalNotification()
+    	.then(setLocalNotification)
+	}
 		return (
 			<View>
 				{
