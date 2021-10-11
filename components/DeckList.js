@@ -27,7 +27,9 @@ class DeckList extends React.Component{
 		const db = showEntries()
 		return (
 			<ScrollView style={styles.container}>
-				<View>
+			{
+				this.state.datakeys !== undefined && this.state.datakeys !== null
+				?<View>
 					{
 					Object.keys(this.state.datakeys).map((key) => {
 					const card = JSON.stringify(this.state.datakeys[key].questions.length)
@@ -35,7 +37,7 @@ class DeckList extends React.Component{
 					return (
 						<TouchableOpacity key={key}  onPress={() => this.props.navigation.navigate('IndividualDeck', {entryId: {key}, card: {card}, questions:{questions} })}>
 							<Text style={styles.decks} >{JSON.stringify(this.state.datakeys[key].title)}</Text>
-							<Text style={styles.cards} >{JSON.stringify(this.state.datakeys[key].questions.length)} cards</Text>
+							<Text style={styles.cards} >Number of cards: {JSON.stringify(this.state.datakeys[key].questions.length)}</Text>
 						</TouchableOpacity>
 					)})
 					}
@@ -45,6 +47,15 @@ class DeckList extends React.Component{
 							<Text style={styles.submitBtnText}>Refresh</Text>
 					</TouchableOpacity>
 				</View>
+				:<View>
+					<Text style={styles.decks} >You dont have any decks yet!</Text>
+					<TouchableOpacity 
+				      	style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.androidSubmitBtn}
+				      	onPress={this.submit}>
+							<Text style={styles.submitBtnText}>Refresh</Text>
+					</TouchableOpacity>
+				</View>
+			}
 			</ScrollView>
 		)
 	}

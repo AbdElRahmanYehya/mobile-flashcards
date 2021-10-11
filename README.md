@@ -11,6 +11,10 @@ to start the react app
 ## Technologies used
 React Native
 
+## Platforms tested
+IOS.<br/>
+Android Simulatory. 
+
 ## Features
 Add new deck.<br/>
 Add questions.<br/>

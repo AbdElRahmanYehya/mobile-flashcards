@@ -32,7 +32,7 @@ render() {
 		return (
 			<View>
 				<Text style={styles.decks} >{this.props['route'].params.entryId.key}</Text>
-				<Text style={styles.cards} >{this.state.deckInfo.questions.length} cards</Text>
+				<Text style={styles.cards} >Number of cards: {this.state.deckInfo.questions.length}</Text>
 				<TouchableOpacity 
 			      	style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.androidSubmitBtn}
 			      	onPress={() => this.props.navigation.navigate('Quiz', {entryId: {id} , questions: {questions}})}>
