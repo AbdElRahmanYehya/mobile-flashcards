@@ -32,8 +32,6 @@ class NewQuestion extends React.Component{
 	render() {
 		return (
 			<View>
-				<Text>New Question</Text>
-				<Text>{this.props['route'].params.entryId.id}</Text>
 			    <TextInput
 			        style={styles.input}
 			        onChangeText={this.changeQuestionText}
