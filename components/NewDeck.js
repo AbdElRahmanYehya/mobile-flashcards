@@ -18,9 +18,9 @@ class NewDeck extends React.Component{
 		//const entry = 'temp val'
 		submitEntry({ key })
 		
-		// this.setState(() => ({
-		// 	text: '',
-		// }))
+		this.props.navigation.navigate('IndividualDeck', {
+              entryId: {key}
+   		})
 	}
 	chenageFirstText = (e) => {
 		const text = e

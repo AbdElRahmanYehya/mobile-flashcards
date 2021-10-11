@@ -1,6 +1,7 @@
 import { AsyncStorage } from 'react-native'
 
 export const DECKS_STORAGE_KEY = 'mobile-flashcards:decks'
+var deckDatabase;
 
 export function submitEntry ({ key }) {
 	return AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify({
@@ -18,13 +19,16 @@ export async function showEntries () {
 	// 	[key]: entry,
 	// }))
 	const value = await AsyncStorage.getItem(DECKS_STORAGE_KEY)
-	
-	let newArray = value.slice();
-	console.log('dsss',value)
-	console.log('dsss',value[4])
-	const temp = await AsyncStorage.getAllKeys()
-	console.log(temp)
+	//console.log(temp)
+	deckDatabase =  JSON.parse(value)
 	return value
+}
+
+export function getEntry (id) {
+	console.log('getEntry db', deckDatabase)
+	console.log('getEntry id', id)
+	console.log('mfrod el output:',deckDatabase[id])
+	return deckDatabase[id]
 }
 
 export function removeEntry (key) {

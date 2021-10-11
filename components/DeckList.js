@@ -2,11 +2,10 @@ import React from 'react'
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, AsyncStorage } from 'react-native'
 import { purple, white } from '../utils/colors'
 import { showEntries, removeEntry, addQuestion, showEntries2, DECKS_STORAGE_KEY } from '../utils/api'
-import { NavigationContainer } from '@react-navigation/native'
+import { NavigationContainer, useIsFocused  } from '@react-navigation/native'
 import { createStackNavigator  } from '@react-navigation/stack'
 
 const Stack = createStackNavigator();
-
 
 class DeckList extends React.Component{
 	async componentDidMount() {

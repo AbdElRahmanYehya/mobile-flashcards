@@ -34,7 +34,6 @@ export function setLocalNotification () {
           .then(({ status }) => {
             if (status === 'granted') {
               Notifications.cancelAllScheduledNotificationsAsync()
-              console.log('notifications',Notifications)
               let tomorrow = new Date()
               tomorrow.setDate(tomorrow.getDate() + 1)
               tomorrow.setHours(20)

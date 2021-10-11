@@ -1,19 +1,42 @@
 import React from 'react'
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, AsyncStorage } from 'react-native'
 import { purple, white } from '../utils/colors'
-import { showEntries, removeEntry, addQuestion, showEntries2, DECKS_STORAGE_KEY } from '../utils/api'
+import { showEntries, removeEntry, addQuestion, getEntry, showEntries2, DECKS_STORAGE_KEY } from '../utils/api'
 
 
 class DeckList extends React.Component{
 //const a = this.props['route'].params.entryId.key
+state = {
+	deckInfo: {
+		title: '',
+		questions: []
+	}
+}
+async componentDidMount() {
+  		const entries = await showEntries()
+		var temp = JSON.parse(entries)
+		this.setState(() => ({
+			datakeys: temp,
+			deckInfo: getEntry(this.props['route'].params.entryId.key)
+		}))
+		console.log('deckinfo', this.state.deckInfo)
+  		//this.forceUpdate()
+  	}
+handleRefresh = async () => {
+		const entries = await showEntries()
+		this.setState(() => ({
+			deckInfo: getEntry(this.props['route'].params.entryId.key)
+		}))
+	}
 render() {
 	const id = this.props['route'].params.entryId.key
-	const questions = this.props['route'].params.questions.questions
+	const questions = this.state.deckInfo.questions
+	console.log('questions in indv', questions)
 		return (
 			<View>
 				<Text>{this.props['route'].params.entryId.key}</Text>
 				<Text style={styles.decks} >{this.props['route'].params.entryId.key}</Text>
-				<Text style={styles.cards} >{this.props['route'].params.card.card}cards</Text>
+				<Text style={styles.cards} >{this.state.deckInfo.questions.length} cards</Text>
 				<TouchableOpacity 
 			      	style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.androidSubmitBtn}
 			      	onPress={() => this.props.navigation.navigate('Quiz', {entryId: {id} , questions: {questions}})}>
@@ -23,6 +46,11 @@ render() {
 			      	style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.androidSubmitBtn}
 			      	onPress={() => this.props.navigation.navigate('NewQuestion', {entryId: {id}})}>
 						<Text style={styles.submitBtnText}>Add New Question</Text>
+				</TouchableOpacity>
+				<TouchableOpacity 
+			      	style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.androidSubmitBtn}
+			      	onPress={this.handleRefresh}>
+						<Text style={styles.submitBtnText}>Refresh</Text>
 				</TouchableOpacity>
 			</View>
 		)
