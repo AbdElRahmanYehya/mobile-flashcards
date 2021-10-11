@@ -12,7 +12,7 @@ to start the react app
 React Native
 
 ## Platforms tested
-IOS.<br/>
+iOS.<br/>
 Android Simulatory. 
 
 ## Features
