@@ -13,7 +13,7 @@ React Native
 
 ## Platforms tested
 iOS.<br/>
-Android Simulatory. 
+Android Simulator. 
 
 ## Features
 Add new deck.<br/>
