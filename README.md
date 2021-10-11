@@ -1,4 +1,4 @@
-# Would You Rather?
+# Mobile Flashcards
 A react native app which gives you flash cards of questions and their answers.
 
 ## How to use
