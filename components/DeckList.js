@@ -1,11 +1,7 @@
 import React from 'react'
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, AsyncStorage } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, ScrollView, StyleSheet, AsyncStorage } from 'react-native'
 import { purple, white } from '../utils/colors'
-import { showEntries, removeEntry, addQuestion, showEntries2, DECKS_STORAGE_KEY } from '../utils/api'
-import { NavigationContainer, useIsFocused  } from '@react-navigation/native'
-import { createStackNavigator  } from '@react-navigation/stack'
-
-const Stack = createStackNavigator();
+import { showEntries } from '../utils/api'
 
 class DeckList extends React.Component{
 	async componentDidMount() {
@@ -14,7 +10,6 @@ class DeckList extends React.Component{
 		this.setState(() => ({
 			datakeys: temp,
 		}))
-  		//this.forceUpdate()
   	}
 	state = {
 		datakeys: {},
@@ -31,26 +26,26 @@ class DeckList extends React.Component{
 	render() {
 		const db = showEntries()
 		return (
-			<View>
-				<Text>Deck list</Text>
-				<TouchableOpacity 
-			      	style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.androidSubmitBtn}
-			      	onPress={this.submit}>
-						<Text style={styles.submitBtnText}>Create Deck</Text>
-				</TouchableOpacity>
-						{
-							Object.keys(this.state.datakeys).map((key) => {
-								const card = JSON.stringify(this.state.datakeys[key].questions.length)
-								const questions = this.state.datakeys[key].questions
-								return (
-									<TouchableOpacity key={key}  onPress={() => this.props.navigation.navigate('IndividualDeck', {entryId: {key}, card: {card}, questions:{questions} })}>
-										<Text style={styles.decks} >{JSON.stringify(this.state.datakeys[key].title)}</Text>
-										<Text style={styles.cards} >{JSON.stringify(this.state.datakeys[key].questions.length)} cards</Text>
-									</TouchableOpacity>
-							)})
-						}
-				<Text>{JSON.stringify(this.state.datakeys['saba3a'])}</Text>
-			</View>
+			<ScrollView style={styles.container}>
+				<View>
+					{
+					Object.keys(this.state.datakeys).map((key) => {
+					const card = JSON.stringify(this.state.datakeys[key].questions.length)
+					const questions = this.state.datakeys[key].questions
+					return (
+						<TouchableOpacity key={key}  onPress={() => this.props.navigation.navigate('IndividualDeck', {entryId: {key}, card: {card}, questions:{questions} })}>
+							<Text style={styles.decks} >{JSON.stringify(this.state.datakeys[key].title)}</Text>
+							<Text style={styles.cards} >{JSON.stringify(this.state.datakeys[key].questions.length)} cards</Text>
+						</TouchableOpacity>
+					)})
+					}
+					<TouchableOpacity 
+				      	style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.androidSubmitBtn}
+				      	onPress={this.submit}>
+							<Text style={styles.submitBtnText}>Refresh</Text>
+					</TouchableOpacity>
+				</View>
+			</ScrollView>
 		)
 	}
 }
@@ -59,8 +54,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   input: {
     height: 40,

@@ -13,28 +13,23 @@ class NewQuestion extends React.Component{
 		const { question, answer } = this.state
 		const key = this.props['route'].params.entryId.id
 		addQuestion(key, question, answer)
-		console.log(key)
 		this.props.navigation.navigate('IndividualDeck', {
               entryId: {key}
    		})
 	}
 	changeQuestionText = (e) => {
 		const question = e
-		//console.log(text)
 		this.setState(() => ({
 			question
 		}))
 	}
 	changeAnswerText = (e) => {
 		const answer = e
-		//console.log(text)
 		this.setState(() => ({
 			answer
 		}))
 	}
 	render() {
-		//console.log(this.props['navigation'].getState())
-		console.log('from new question',this.props['route'].params.entryId.id)
 		return (
 			<View>
 				<Text>New Question</Text>

@@ -17,18 +17,12 @@ const Stack = createStackNavigator();
 function HomeApp({ navigation })  {
   return (
 
-        <Tab.Navigator>
+        <Tab.Navigator screenOptions={{
+         headerShown: false
+         }}>
           <Tab.Screen name="New deck" component={DeckList} />
           <Tab.Screen name="deck list" component={NewDeck} />
         </Tab.Navigator>
-
-    // <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-    //   <Text>Details Screen</Text>
-    //   <TouchableOpacity
-    //     title="Go to Details... again"
-    //     onPress={() => navigation.navigate('Details')}
-    //   ><Text>Henaaaaaaaa 2</Text></TouchableOpacity>
-    // </View> 
   )
 }
 
@@ -38,7 +32,9 @@ export default class App extends React.Component {
   }
   render() {
     return (
-      <NavigationContainer>
+      <NavigationContainer screenOptions={{
+          headerShown: false
+          }}>
         <Stack.Navigator>
           <Stack.Screen name="Home" component={HomeApp} />
           <Stack.Screen name="IndividualDeck" component={IndividualDeck} />
@@ -58,7 +54,3 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-
-      // <View style={styles.container}>
-      //   <NewDeck />
-      // </View>

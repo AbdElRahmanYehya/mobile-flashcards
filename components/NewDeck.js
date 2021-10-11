@@ -7,15 +7,8 @@ class NewDeck extends React.Component{
 	state = {
 		text: '',
 	}
-	submit = (e) => {
-		e.preventDefault()
-
-		//console.log(text)
-		// Navigate to home
-		//submitEntry({ key, entry })
-		// Crear local notification
+	submit = () => {
 		const key = this.state.text
-		//const entry = 'temp val'
 		submitEntry({ key })
 		
 		this.props.navigation.navigate('IndividualDeck', {
@@ -24,7 +17,6 @@ class NewDeck extends React.Component{
 	}
 	chenageFirstText = (e) => {
 		const text = e
-		//console.log(text)
 		this.setState(() => ({
 			text
 		}))

@@ -19,8 +19,6 @@ async componentDidMount() {
 			datakeys: temp,
 			deckInfo: getEntry(this.props['route'].params.entryId.key)
 		}))
-		console.log('deckinfo', this.state.deckInfo)
-  		//this.forceUpdate()
   	}
 handleRefresh = async () => {
 		const entries = await showEntries()
@@ -31,10 +29,8 @@ handleRefresh = async () => {
 render() {
 	const id = this.props['route'].params.entryId.key
 	const questions = this.state.deckInfo.questions
-	console.log('questions in indv', questions)
 		return (
 			<View>
-				<Text>{this.props['route'].params.entryId.key}</Text>
 				<Text style={styles.decks} >{this.props['route'].params.entryId.key}</Text>
 				<Text style={styles.cards} >{this.state.deckInfo.questions.length} cards</Text>
 				<TouchableOpacity 
