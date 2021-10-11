@@ -31,7 +31,6 @@ class DeckList extends React.Component{
 
 	render() {
 		const db = showEntries()
-		console.log('xz',this.state)
 		return (
 			<View>
 				<Text>Deck list</Text>
@@ -42,8 +41,10 @@ class DeckList extends React.Component{
 				</TouchableOpacity>
 						{
 							Object.keys(this.state.datakeys).map((key) => {
+								const card = JSON.stringify(this.state.datakeys[key].questions.length)
+								const questions = this.state.datakeys[key].questions
 								return (
-									<TouchableOpacity key={key}  onPress={() => this.props.navigation.navigate('IndividualDeck', {entryId: {key}})}>
+									<TouchableOpacity key={key}  onPress={() => this.props.navigation.navigate('IndividualDeck', {entryId: {key}, card: {card}, questions:{questions} })}>
 										<Text style={styles.decks} >{JSON.stringify(this.state.datakeys[key].title)}</Text>
 										<Text style={styles.cards} >{JSON.stringify(this.state.datakeys[key].questions.length)} cards</Text>
 									</TouchableOpacity>
